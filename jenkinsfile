@@ -1,0 +1,29 @@
+pipeline{
+    agent any
+    stages{
+        stage("clone"){
+            steps{
+            retry(3){
+               sha "git clone https://github.com/sbtalk71/kube-jenkins-app.git"
+               }
+            }
+        }
+        stage("compile"){
+            steps{
+            sha "mvn clean compile"
+            }
+        }
+
+         stage("package"){
+            steps{
+            sha "mvn package"
+            }
+        }
+       stage("docker build"){
+                   steps{
+                   sha "docker build -t kube-jenkins-app:${BUILD_NUMBER}"
+                   }
+               }
+        }
+
+}
