@@ -4,24 +4,24 @@ pipeline{
         stage("clone"){
             steps{
             retry(3){
-               sh git clone https://github.com/sbtalk71/kube-jenkins-app.git
+               bat git clone https://github.com/sbtalk71/kube-jenkins-app.git
                }
             }
         }
         stage("compile"){
             steps{
-            sh mvn clean compile
+            bat mvn clean compile
             }
         }
 
          stage("package"){
             steps{
-            sh mvn package
+            bat mvn package
             }
         }
        stage("docker build"){
                    steps{
-                   sh docker build -t kube-jenkins-app:${BUILD_NUMBER}
+                 bat docker build -t kube-jenkins-app:${BUILD_NUMBER}
                    }
                }
         }
