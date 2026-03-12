@@ -3,9 +3,7 @@ pipeline{
     stages{
         stage("clone"){
             steps{
-            retry(3){
-               sh "git clone https://github.com/sbtalk71/kube-jenkins-app.git"
-               }
+             sh "git clone https://github.com/sbtalk71/kube-jenkins-app.git"
             }
         }
         stage("compile"){
@@ -21,7 +19,7 @@ pipeline{
         }
        stage("docker build"){
                    steps{
-                   sh "docker build -t kube-jenkins-app:${BUILD_NUMBER}"
+                   sh "docker build -t kube-jenkins-app:${BUILD_NUMBER} ."
                    }
                }
         }
